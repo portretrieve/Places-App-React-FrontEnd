@@ -1,0 +1,19 @@
+import React from "react";
+import "./UserItem.css";
+
+function UserItem(props) {
+  return (
+    <li className="user-item" key={props.id}>
+      <div className="user-item__content">
+        <div className="user-item__image">
+          <img src={props.image} alt={props.name} style={{ width: "300px" }} />
+        </div>
+        <div className="user-item__info"></div>
+        <p>Name : {props.name}</p>
+        <p>Place Count : {props.placeCount}</p>
+      </div>
+    </li>
+  );
+}
+
+export default UserItem;
