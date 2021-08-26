@@ -1,7 +1,7 @@
 import React from "react";
 
 import Input from "../../shared/FormElements/Input";
-import { VALIDATOR_REQUIRE } from "../../shared/Util/validator";
+import {VALIDATOR_REQUIRE} "../../shared/Util/validator";
 import "./NewPlace.css";
 
 function NewPlace() {
@@ -12,7 +12,7 @@ function NewPlace() {
         type="text"
         label="Title"
         placeholder={`Enter the Title`}
-        validators={[VALIDATOR_REQUIRE()]}
+        validators={[]}
         errorText="Please enter a valid title."
       />
     </form>

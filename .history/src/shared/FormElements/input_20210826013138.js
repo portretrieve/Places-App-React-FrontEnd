@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
 
 import { validate } from "../../shared/Util/validator";
 import "./Input.css";

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Input from "../../shared/FormElements/Input";
-import { VALIDATOR_REQUIRE } from "../../shared/Util/validator";
+import {VALIDATOR_REQUIRE} "../../shared/Util/validator";
 import "./NewPlace.css";
 
 function NewPlace() {

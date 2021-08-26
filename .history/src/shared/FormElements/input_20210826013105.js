@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
 
 import { validate } from "../../shared/Util/validator";
 import "./Input.css";
@@ -65,7 +65,7 @@ function Input(props) {
   return (
     <div
       className={`form-control ${
-        !inputState.isValid && inputState.isTouched && "form-control--invalid"
+        !inputState.isValid && "form-control--invalid"
       }`}
     >
       <label htmlFor={props.id}>{props.label}</label>
