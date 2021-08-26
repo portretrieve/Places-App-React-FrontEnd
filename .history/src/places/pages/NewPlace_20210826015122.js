@@ -10,8 +10,6 @@ import "./NewPlace.css";
 function NewPlace() {
   const titleInputHandler = useCallback((id, value, isValid) => {}, []);
 
-  const descriptionInputHandler = useCallback((id, value, isValid) => {}, []);
-
   return (
     <form className="place-form">
       <Input
@@ -30,7 +28,7 @@ function NewPlace() {
         label="Description"
         validators={[VALIDATOR_MINLENGTH(5)]}
         errorText="Please enter a valid description (at least 5 charecters)."
-        onInput={descriptionInputHandler}
+        onInput={titleInputHandler}
       />
     </form>
   );
