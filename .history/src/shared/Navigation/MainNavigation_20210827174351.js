@@ -31,7 +31,7 @@ function MainNavigation(props) {
         <button className="main-navigation__menu-btn" onClick={openDrawer}>
           <span />
           <span />
-          <span />
+          {/* <span /> */}
         </button>
         <h1 className="main-navigation__title">
           <Link to="/">Your Places</Link>

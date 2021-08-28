@@ -19,12 +19,6 @@ function SideDrawer(props) {
     </CSSTransition>
   );
 
-  // const content = props.show && (
-  //   <aside className="side-drawer" onClick={props.whenClicked}>
-  //     {props.children}
-  //   </aside>
-  // );
-
   return ReactDOM.createPortal(content, document.getElementById("drawer-hook"));
 }
 

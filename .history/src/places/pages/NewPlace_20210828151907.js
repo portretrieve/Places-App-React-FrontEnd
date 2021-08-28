@@ -23,12 +23,13 @@ const formReducer = (state, action) => {
         formInputs: {
           ...state.formInputs,
           [action.inputId]: { value: action.value, isValid: action.isValid }
-        },
-        isValid: formIsValid
+        }
       };
+      break;
 
     default:
       return state;
+      break;
   }
 };
 
@@ -47,14 +48,9 @@ function NewPlace() {
     isFormValid: false
   });
 
-  const inputHandler = useCallback((id, value, isValid) => {
-    dispatch({
-      type: "INPUT_CHANGE",
-      value: value,
-      isValid: isValid,
-      inputId: id
-    });
-  }, []);
+  const titleInputHandler = useCallback((id, value, isValid) => {}, []);
+
+  const descriptionInputHandler = useCallback((id, value, isValid) => {}, []);
 
   return (
     <form className="place-form">
@@ -66,7 +62,7 @@ function NewPlace() {
         placeholder={`Enter the Title`}
         validators={[VALIDATOR_REQUIRE()]}
         errorText="Please enter a valid title."
-        onInput={inputHandler}
+        onInput={titleInputHandler}
       />
       <Input
         id="description"
@@ -74,7 +70,7 @@ function NewPlace() {
         label="Description"
         validators={[VALIDATOR_MINLENGTH(5)]}
         errorText="Please enter a valid description (at least 5 charecters)."
-        onInput={inputHandler}
+        onInput={descriptionInputHandler}
       />
     </form>
   );
