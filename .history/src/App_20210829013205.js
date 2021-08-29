@@ -67,7 +67,9 @@ function App() {
     >
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main>
+          <Switch>{routes}</Switch>
+        </main>
       </Router>
     </AuthContext.Provider>
   );

@@ -28,7 +28,7 @@ function App() {
   let routes;
   if (isLoggedIn) {
     routes = (
-      <Switch>
+      <React.Fragment>
         <Route path="/" exact>
           <Users />
         </Route>
@@ -41,12 +41,15 @@ function App() {
         <Route path="/places/:placeId" exact>
           <UpdatePlace />
         </Route>
+        <Route path="/auth" exact>
+          <Authenticate />
+        </Route>
         <Redirect to="/" />
-      </Switch>
+      </React.Fragment>
     );
   } else {
     routes = (
-      <Switch>
+      <React.Fragment>
         <Route path="/" exact>
           <Users />
         </Route>
@@ -57,7 +60,7 @@ function App() {
           <Authenticate />
         </Route>
         <Redirect to="/auth" />
-      </Switch>
+      </React.Fragment>
     );
   }
 
@@ -67,7 +70,9 @@ function App() {
     >
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main>
+          <Switch>{routes}</Switch>
+        </main>
       </Router>
     </AuthContext.Provider>
   );

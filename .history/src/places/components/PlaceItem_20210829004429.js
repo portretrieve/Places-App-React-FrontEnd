@@ -5,11 +5,10 @@ import Button from "../../shared/FormElements/Button";
 import Modal from "../../shared/UIElements/Modal";
 import Map from "../../shared/UIElements/Map";
 import { AuthContext } from "../../shared/context/auth-context";
+
 import "./PlaceItem.css";
 
 function PlaceItem(props) {
-  const AUTH = useContext(AuthContext);
-
   const [showMapModel, setShowMapModel] = useState(false);
   const [showDeleteModal, setShowDeleteModel] = useState(false);
 
@@ -75,14 +74,10 @@ function PlaceItem(props) {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {AUTH.isLoggedIn && (
-              <Button to={`/places/${props.id}`}>EDIT</Button>
-            )}
-            {AUTH.isLoggedIn && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                DELETE
-              </Button>
-            )}
+            <Button to={`/places/${props.id}`}>EDIT</Button>
+            <Button danger onClick={showDeleteWarningHandler}>
+              DELETE
+            </Button>
           </div>
         </Card>
       </li>

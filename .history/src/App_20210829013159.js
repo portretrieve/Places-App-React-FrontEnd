@@ -46,7 +46,7 @@ function App() {
     );
   } else {
     routes = (
-      <Switch>
+      <React.Fragment>
         <Route path="/" exact>
           <Users />
         </Route>
@@ -57,7 +57,7 @@ function App() {
           <Authenticate />
         </Route>
         <Redirect to="/auth" />
-      </Switch>
+      </React.Fragment>
     );
   }
 
@@ -67,7 +67,9 @@ function App() {
     >
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main>
+          <Switch>{routes}</Switch>
+        </main>
       </Router>
     </AuthContext.Provider>
   );

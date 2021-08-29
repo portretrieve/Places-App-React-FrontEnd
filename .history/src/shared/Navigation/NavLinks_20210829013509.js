@@ -30,7 +30,7 @@ function NavLinks(props) {
       )}
       {auth.isLoggedIn && (
         <li>
-          <button onClick={auth.logout}>LOGOUT</button>
+          <NavLink>LOGOUT</NavLink>
         </li>
       )}
     </ul>

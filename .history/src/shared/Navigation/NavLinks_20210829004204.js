@@ -18,21 +18,12 @@ function NavLinks(props) {
           <NavLink to="/u1/places">MY PLACES</NavLink>
         </li>
       )}
-      {auth.isLoggedIn && (
-        <li>
-          <NavLink to="/places/new">ADD PLACE</NavLink>
-        </li>
-      )}
-      {!auth.isLoggedIn && (
-        <li>
-          <NavLink to="/auth">LOGIN</NavLink>
-        </li>
-      )}
-      {auth.isLoggedIn && (
-        <li>
-          <button onClick={auth.logout}>LOGOUT</button>
-        </li>
-      )}
+      <li>
+        <NavLink to="/places/new">ADD PLACE</NavLink>
+      </li>
+      <li>
+        <NavLink to="/auth">LOGIN</NavLink>
+      </li>
     </ul>
   );
 }

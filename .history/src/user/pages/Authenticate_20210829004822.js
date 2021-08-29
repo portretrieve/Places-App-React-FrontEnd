@@ -13,7 +13,6 @@ import { AuthContext } from "../../shared/context/auth-context";
 import "./Auth.css";
 
 function Authenticate() {
-  const AUTH = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -26,7 +25,6 @@ function Authenticate() {
   const authSubmitHandler = (event) => {
     event.preventDefault();
     console.log(formState.inputs);
-    AUTH.login();
   };
 
   const switchModeHandler = (event) => {

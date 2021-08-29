@@ -26,7 +26,6 @@ function Authenticate() {
   const authSubmitHandler = (event) => {
     event.preventDefault();
     console.log(formState.inputs);
-    AUTH.login();
   };
 
   const switchModeHandler = (event) => {
