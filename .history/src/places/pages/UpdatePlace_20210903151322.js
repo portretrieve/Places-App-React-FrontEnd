@@ -13,15 +13,12 @@ import { useHttpClient } from "../../shared/hooks/http-Hook";
 import "./PlaceForm.css";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
-import { AuthContext } from "../../shared/context/auth-context";
 
 function UpdatePlace() {
   const { isLoading, errorState, sendRequest, clearError } = useHttpClient();
   const [loadedPlace, setLoadedPlace] = useState();
   const placeId = useParams().placeId;
-  console.log(placeId);
   const history = useHistory();
-  const auth = useContext(AuthContext);
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -72,13 +69,13 @@ function UpdatePlace() {
         "PATCH",
         JSON.stringify({
           title: formState.inputs.title.value,
-          description: formState.inputs.description.value
+          description: formState.input.description.value
         }),
         {
           "Content-Type": "application/json"
         }
       );
-      history.push("/" + auth.userId + "/places");
+      history.push("/");
     } catch (error) {}
   };
 

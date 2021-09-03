@@ -19,7 +19,6 @@ function UpdatePlace() {
   const { isLoading, errorState, sendRequest, clearError } = useHttpClient();
   const [loadedPlace, setLoadedPlace] = useState();
   const placeId = useParams().placeId;
-  console.log(placeId);
   const history = useHistory();
   const auth = useContext(AuthContext);
 
@@ -72,7 +71,7 @@ function UpdatePlace() {
         "PATCH",
         JSON.stringify({
           title: formState.inputs.title.value,
-          description: formState.inputs.description.value
+          description: formState.input.description.value
         }),
         {
           "Content-Type": "application/json"

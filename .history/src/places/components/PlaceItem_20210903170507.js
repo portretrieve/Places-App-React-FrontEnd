@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import Card from "../../shared/UIElements/Card";
 import Button from "../../shared/FormElements/Button";
@@ -13,6 +14,7 @@ import "./PlaceItem.css";
 
 function PlaceItem(props) {
   const AUTH = useContext(AuthContext);
+  const history = useHistory();
   const { isLoading, errorState, sendRequest, clearError } = useHttpClient();
 
   const [showMapModel, setShowMapModel] = useState(false);
@@ -90,10 +92,10 @@ function PlaceItem(props) {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {AUTH.userId === props.creatorId && (
+            {AUTH.isLoggedIn && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
-            {AUTH.userId === props.creatorId && (
+            {AUTH.isLoggedIn && (
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>

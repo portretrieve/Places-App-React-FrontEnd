@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Input from "../../shared/FormElements/Input";
 import Button from "../../shared/FormElements/Button";
@@ -13,15 +13,11 @@ import { useHttpClient } from "../../shared/hooks/http-Hook";
 import "./PlaceForm.css";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
-import { AuthContext } from "../../shared/context/auth-context";
 
 function UpdatePlace() {
   const { isLoading, errorState, sendRequest, clearError } = useHttpClient();
   const [loadedPlace, setLoadedPlace] = useState();
   const placeId = useParams().placeId;
-  console.log(placeId);
-  const history = useHistory();
-  const auth = useContext(AuthContext);
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -64,31 +60,10 @@ function UpdatePlace() {
     fetchPlace();
   }, [sendRequest, placeId, setFormData]);
 
-  const placeSubmitHandler = async (event) => {
+  const placeSubmitHandler = (event) => {
     event.preventDefault();
-    try {
-      await sendRequest(
-        `http://localhost:5000/api/places/${placeId}`,
-        "PATCH",
-        JSON.stringify({
-          title: formState.inputs.title.value,
-          description: formState.inputs.description.value
-        }),
-        {
-          "Content-Type": "application/json"
-        }
-      );
-      history.push("/" + auth.userId + "/places");
-    } catch (error) {}
+    console.log(formState.inputs);
   };
-
-  if (isLoading) {
-    return (
-      <div className="center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
 
   if (!loadedPlace && !errorState) {
     return (
@@ -100,38 +75,45 @@ function UpdatePlace() {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <React.Fragment>
       <ErrorModal error={errorState} onClear={clearError} />
-      {!isLoading && loadedPlace && (
-        <form className="place-form" onSubmit={placeSubmitHandler}>
-          <Input
-            id="title"
-            element="input"
-            type="text"
-            label="Title"
-            placeholder={`Enter the Title`}
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid title."
-            onInput={inputHandler}
-            initialValue={loadedPlace.title}
-            initialValidity={true}
-          />
-          <Input
-            id="description"
-            element="textarea"
-            label="Description"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Please enter a valid description (at least 5 charecters)."
-            onInput={inputHandler}
-            initialValue={loadedPlace.description}
-            initialValidity={true}
-          />
-          <Button type="submit" disabled={!formState.isValid}>
-            UPDATE PLACE
-          </Button>
-        </form>
-      )}
+
+      <form className="place-form" onSubmit={placeSubmitHandler}>
+        <Input
+          id="title"
+          element="input"
+          type="text"
+          label="Title"
+          placeholder={`Enter the Title`}
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a valid title."
+          onInput={inputHandler}
+          initialValue={formState.inputs.title.value}
+          initialValidity={formState.inputs.title.isValid}
+        />
+        <Input
+          id="description"
+          element="textarea"
+          label="Description"
+          validators={[VALIDATOR_MINLENGTH(5)]}
+          errorText="Please enter a valid description (at least 5 charecters)."
+          onInput={inputHandler}
+          initialValue={formState.inputs.description.value}
+          initialValidity={formState.inputs.description.isValid}
+        />
+        <Button type="submit" disabled={!formState.isValid}>
+          UPDATE PLACE
+        </Button>
+      </form>
     </React.Fragment>
   );
 }

@@ -26,11 +26,7 @@ function UserPlaces() {
     fetchPlaces();
   }, [sendRequest, userId]);
 
-  const placeDeleteHandler = (deletedPlaceId) => {
-    setLoadedPlaces((prevPlaces) =>
-      prevPlaces.filter((place) => place.id !== deletedPlaceId)
-    );
-  };
+  const placeDeleteHandler = (deletedPlaceId) => {};
 
   return (
     <React.Fragment>

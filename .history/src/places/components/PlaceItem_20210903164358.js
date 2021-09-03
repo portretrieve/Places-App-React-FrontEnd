@@ -6,14 +6,10 @@ import Modal from "../../shared/UIElements/Modal";
 import Map from "../../shared/UIElements/Map";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-Hook";
-import ErrorModal from "../../shared/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
-
 import "./PlaceItem.css";
 
 function PlaceItem(props) {
   const AUTH = useContext(AuthContext);
-  const { isLoading, errorState, sendRequest, clearError } = useHttpClient();
 
   const [showMapModel, setShowMapModel] = useState(false);
   const [showDeleteModal, setShowDeleteModel] = useState(false);
@@ -30,21 +26,18 @@ function PlaceItem(props) {
     setShowDeleteModel(false);
   };
   const confirmDeleteHandler = async () => {
-    try {
-      await sendRequest(
-        "http://localhost:5000/api/places/" + props.id,
-        "DELETE"
-      );
+    console.log("deleting", props.id);
+    // try {
+    //   await
+    // } catch (error) {
 
-      props.onDelete(props.id);
-    } catch (error) {}
+    // }
 
     setShowDeleteModel(false);
   };
 
   return (
-    <React.Fragment>
-      <ErrorModal error={errorState} onClear={clearError} />
+    <>
       <Modal
         show={showMapModel}
         onCancel={closeMapHandler}
@@ -77,7 +70,6 @@ function PlaceItem(props) {
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">
-          {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
             <img src={props.image} alt={props.title} />
           </div>
@@ -90,10 +82,10 @@ function PlaceItem(props) {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {AUTH.userId === props.creatorId && (
+            {AUTH.isLoggedIn && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
-            {AUTH.userId === props.creatorId && (
+            {AUTH.isLoggedIn && (
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
@@ -101,7 +93,7 @@ function PlaceItem(props) {
           </div>
         </Card>
       </li>
-    </React.Fragment>
+    </>
   );
 }
 

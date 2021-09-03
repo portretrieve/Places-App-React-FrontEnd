@@ -72,7 +72,7 @@ function UpdatePlace() {
         "PATCH",
         JSON.stringify({
           title: formState.inputs.title.value,
-          description: formState.inputs.description.value
+          description: formState.input.description.value
         }),
         {
           "Content-Type": "application/json"

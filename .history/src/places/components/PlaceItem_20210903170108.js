@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import Card from "../../shared/UIElements/Card";
 import Button from "../../shared/FormElements/Button";
@@ -6,13 +7,11 @@ import Modal from "../../shared/UIElements/Modal";
 import Map from "../../shared/UIElements/Map";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-Hook";
-import ErrorModal from "../../shared/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
-
 import "./PlaceItem.css";
 
 function PlaceItem(props) {
   const AUTH = useContext(AuthContext);
+  const history = useHistory();
   const { isLoading, errorState, sendRequest, clearError } = useHttpClient();
 
   const [showMapModel, setShowMapModel] = useState(false);
@@ -43,8 +42,7 @@ function PlaceItem(props) {
   };
 
   return (
-    <React.Fragment>
-      <ErrorModal error={errorState} onClear={clearError} />
+    <>
       <Modal
         show={showMapModel}
         onCancel={closeMapHandler}
@@ -77,7 +75,6 @@ function PlaceItem(props) {
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">
-          {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
             <img src={props.image} alt={props.title} />
           </div>
@@ -90,10 +87,10 @@ function PlaceItem(props) {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {AUTH.userId === props.creatorId && (
+            {AUTH.isLoggedIn && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
-            {AUTH.userId === props.creatorId && (
+            {AUTH.isLoggedIn && (
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
@@ -101,7 +98,7 @@ function PlaceItem(props) {
           </div>
         </Card>
       </li>
-    </React.Fragment>
+    </>
   );
 }
 
