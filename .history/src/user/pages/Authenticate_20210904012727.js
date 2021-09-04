@@ -31,7 +31,6 @@ function Authenticate() {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
 
     if (isLoginMode) {
       try {
@@ -80,10 +79,6 @@ function Authenticate() {
           ...formState.inputs,
           name: {
             value: "",
-            isValid: false
-          },
-          image: {
-            value: null,
             isValid: false
           }
         },

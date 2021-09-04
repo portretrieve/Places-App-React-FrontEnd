@@ -31,7 +31,6 @@ function Authenticate() {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
 
     if (isLoginMode) {
       try {
@@ -71,7 +70,7 @@ function Authenticate() {
   const switchModeHandler = (event) => {
     if (!isLoginMode) {
       setFormData(
-        { ...formState.inputs, name: undefined, image: undefined },
+        { ...formState.inputs, name: undefined },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
     } else {
@@ -80,10 +79,6 @@ function Authenticate() {
           ...formState.inputs,
           name: {
             value: "",
-            isValid: false
-          },
-          image: {
-            value: null,
             isValid: false
           }
         },
@@ -111,10 +106,6 @@ function Authenticate() {
               placeholder="Enter Your name for Sign-Up"
               onInput={inputHandler}
             />
-          )}
-
-          {!isLoginMode && (
-            <ImageUpload center id="image" onInput={inputHandler} />
           )}
           <Input
             id="email"

@@ -31,7 +31,6 @@ function Authenticate() {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
 
     if (isLoginMode) {
       try {
@@ -71,7 +70,7 @@ function Authenticate() {
   const switchModeHandler = (event) => {
     if (!isLoginMode) {
       setFormData(
-        { ...formState.inputs, name: undefined, image: undefined },
+        { ...formState.inputs, name: undefined },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
     } else {
@@ -80,10 +79,6 @@ function Authenticate() {
           ...formState.inputs,
           name: {
             value: "",
-            isValid: false
-          },
-          image: {
-            value: null,
             isValid: false
           }
         },
@@ -113,9 +108,7 @@ function Authenticate() {
             />
           )}
 
-          {!isLoginMode && (
-            <ImageUpload center id="image" onInput={inputHandler} />
-          )}
+          {!isLoginMode && <ImageUpload id={image.id} />}
           <Input
             id="email"
             element="input"
