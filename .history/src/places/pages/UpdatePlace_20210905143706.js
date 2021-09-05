@@ -76,7 +76,7 @@ function UpdatePlace() {
         }),
         {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.token
+          Authorization: auth.token
         }
       );
       history.push("/" + auth.userId + "/places");

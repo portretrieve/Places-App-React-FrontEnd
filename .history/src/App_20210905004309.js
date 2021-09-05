@@ -16,7 +16,7 @@ import { AuthContext } from "./shared/context/auth-context";
 
 function App() {
   const [token, setToken] = useState(false);
-  const [userId, setUserId] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   const login = useCallback((uid, token) => {
     setUserId(uid);
@@ -68,7 +68,7 @@ function App() {
     <AuthContext.Provider
       value={{
         isLoggedIn: !!token,
-        token: token,
+        token:token
         userId: userId,
         login: login,
         logout: logout

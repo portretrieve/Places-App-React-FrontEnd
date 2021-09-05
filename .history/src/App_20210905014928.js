@@ -15,8 +15,8 @@ import Authenticate from "./user/pages/Authenticate";
 import { AuthContext } from "./shared/context/auth-context";
 
 function App() {
-  const [token, setToken] = useState(false);
-  const [userId, setUserId] = useState(false);
+  const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const login = useCallback((uid, token) => {
     setUserId(uid);

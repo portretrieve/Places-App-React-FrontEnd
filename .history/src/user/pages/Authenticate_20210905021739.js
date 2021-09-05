@@ -56,6 +56,8 @@ function Authenticate() {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
+    console.log(formState.inputs);
+
     if (isLoginMode) {
       try {
         const responseData = await sendRequest(
@@ -71,6 +73,7 @@ function Authenticate() {
         AUTH.login(responseData.userId, responseData.token);
       } catch (error) {} //ignore here -- already handles in hook
     } else {
+      event.preventDefault();
       try {
         const formData = new FormData();
         formData.append("email", formState.inputs.email.value);

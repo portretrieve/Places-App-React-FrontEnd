@@ -35,7 +35,7 @@ function PlaceItem(props) {
         "http://localhost:5000/api/places/" + props.id,
         "DELETE",
         null,
-        { Authorization: "Bearer " + AUTH.token }
+        { Authorization: "Bearer " + auth.token }
       );
 
       props.onDelete(props.id);
