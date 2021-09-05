@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,7 +16,7 @@ import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
 
 function App() {
-  const { token, login, logout, userId } = useAuth();
+  const { token, login, logout } = useAuth();
 
   let routes;
   if (token) {
